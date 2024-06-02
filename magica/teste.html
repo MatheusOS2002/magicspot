@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão</title>
+</head>
+
+<body>
+    <h1><strong>Previsão da soma</strong></h1>
+    <h3>
+        Vou realizar uma previsão de acordo com a primeira parcela informada.
+        A partir da segunda parcela também acrescentarei números à soma com a mesma quantidade de algarismos informada.
+    </h3>
+    <div id="div_primeiraParcela">
+        Quantas parcelas utilizará na soma? <input type="number" id="input_qtdParcelas"><br>
+        Quantos algarismos terá as parcelas? <input type="number" id="input_qtdAlgarismos"><br>
+        Digite o valor da primeira parcela: <input type="number" id="input_primeiraParcela"><br>
+        <button onclick="preverResultado()">Prever resultado</button>
+    </div>
+    <div id="div_parcelasRestantes" style="display: none">
+        Adicione as parcelas restantes: <input type="number" id="input_parcelasRestantes"><br>
+        <button onclick="adicionarParcela()">Adicionar parcela</button><br>
+        <button onclick="mostrarResultado()">Ver resultado</button>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const listaParcelas = []
+    function preverResultado() {
+        const qtdParcelas = Number(input_qtdParcelas.value)
+        const qtdAlgarismos = Number(input_qtdAlgarismos.value)
+        let primeiraParcela = input_primeiraParcela.value
+        const algarismosParcela = primeiraParcela.length
+        primeiraParcela = Number(input_primeiraParcela.value)
+
+        if (algarismosParcela != qtdAlgarismos) {
+            alert("O número de algarismos informado está incorreto ou a parcela tem o número incorreto de algarismos")
+        } else {
+            listaParcelas.push(primeiraParcela)
+
+            div_primeiraParcela.style.display = "none"
+            div_parcelasRestantes.style.display = "block"
+            div_parcelasRestantes.innerHTML += `O resultado da soma será ${qtdParcelas}${primeiraParcela - qtdParcelas}`
+        }
+    }
+
+    function adicionarParcela() {
+        const qtdAlgarismos = Number(input_qtdAlgarismos.value)
+        const parcela = Number(input_parcelasRestantes.value)
+        listaParcelas.push(parcela)
+        
+        let numeroChave = ""
+        for(let algarismos = 1; algarismos < qtdAlgarismos; algarismos += 1) {
+            numeroChave += "9"
+        }
+
+        numeroChave = Number(numeroChave)
+
+        let meuNumero = numeroChave - parcela
+
+        div_resultado.innerHTML += `<br>Adicionei ${meuNumero} à soma`
+    }
+</script>
