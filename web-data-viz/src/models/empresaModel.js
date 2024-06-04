@@ -6,12 +6,6 @@ function buscarPorId(id) {
   return database.executar(instrucaoSql);
 }
 
-function listar() {
-  var instrucaoSql = `SELECT * FROM empresa`;
-
-  return database.executar(instrucaoSql);
-}
-
 function buscarPorCnpj(cnpj) {
   var instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj}'`;
 
@@ -24,4 +18,6 @@ function cadastrar(razaoSocial, cnpj) {
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar };
+module.exports = {
+  buscarPorCnpj, buscarPorId, cadastrar,
+};
