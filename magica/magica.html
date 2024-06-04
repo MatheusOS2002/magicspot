@@ -37,10 +37,14 @@
         const primeiraParcela = input_primeiraParcela.value
         const qtdAlgarismosParcela = primeiraParcela.length
         const subtraendo = qtdParcelas - 1
+        const comecaComZero = primeiraParcela.startsWith(0)
         
-
         if (qtdAlgarismosParcela != qtdAlgarismos) {
             alert("O número de algarismos da parcela informado está incorreto ou a parcela tem o número incorreto de algarismos")
+        } else if(primeiraParcela <= qtdParcelas) {
+            alert("O número deve ser maior que a quantidade de parcelas")
+        } else if(comecaComZero) {
+            alert("A parcela formada deve começar com um número maior que zero")
         } else {
             listaParcelas.push(primeiraParcela)
 
@@ -53,6 +57,7 @@
     function adicionarParcela() {
         const qtdAlgarismos = Number(input_qtdAlgarismos.value)
         const parcela = input_parcelasRestantes.value
+        const comecaComZero = parcela.startsWith(0)
         const qtdMaxParcelas = Number(input_qtdParcelas.value)
         const qtdAlgarismosParcela = parcela.length
         let qtdParcelasRegistradas = listaParcelas.length
@@ -60,6 +65,10 @@
         
         if (qtdAlgarismosParcela != qtdAlgarismos) {
             alert("O número de algarismos da parcela informado está incorreto ou a parcela tem o número incorreto de algarismos")
+        } else if(primeiraParcela <= qtdParcelas) {
+            alert("O número deve ser maior que a quantidade de parcelas")
+        } else if(comecaComZero) {
+            alert("A parcela formada deve começar com um número maior que zero")
         } else if (qtdMaxParcelas == qtdParcelasRegistradas) {
             alert(`Você já registrou todas as parcelas, por favor recarregue a página e refaça a mágica`)
         } else {
