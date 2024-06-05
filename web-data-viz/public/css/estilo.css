@@ -9,7 +9,7 @@ body {
 
 :root {
   --tamanho-header: 80px;
-  --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+  --tamanho-banner: calc(70vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-footer: 20px;
@@ -17,13 +17,12 @@ body {
 
 .container {
   display: flex;
-  width: 80%;
+  width: 100%;
   margin: auto;
 }
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 2px solid #FAE57F;
 }
 
 .header .container {
@@ -69,7 +68,7 @@ body {
 .banner {
   height: var(--tamanho-banner);
   color: white;
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  background-image: url('./images/playing-cards.jpg');
   background-size: cover;
 }
 
@@ -97,7 +96,7 @@ body {
   display: flex;
 }
 
-.social .container {
+.social .container .box2 {
   justify-content: center;
 }
 
@@ -112,7 +111,7 @@ body {
   padding: 30px 0;
 }
 
-.social p {
+.social .box2 p {
   text-align: center;
 }
 
@@ -120,12 +119,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 30px;
 }
 
+.box2 {
+  padding-right: 60px;
+}
 /* FOOTER */
 
 .footer {
-  background-color: #FAE57F;
+  background-color: #ceb745;
+  /* background-color: #FAE57F; */
   height: 100px;
   color: #2D5731;
   display: flex;
@@ -145,9 +149,9 @@ body {
 
 .login {
   height: var(--tamanho-login);
-  background-image: url('./images/white-curtain.avif');
+  background-image: url('./images/stage-curtains-on-white-background.jpg');
   background-size: cover;
-  background-position-y: -200px;
+  background-position-y: -600px;
 }
 
 .login .container {
@@ -158,12 +162,12 @@ body {
 
 .card {
   width: 50%;
-  background-color: #90EE90;
+  background-color: rgb(197, 47, 47);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  color: palevioletred;
+  color: #FAE57F;
   flex-direction: column;
   height: fit-content;
   padding: 20px 0;
@@ -219,7 +223,7 @@ body {
   font-weight: 600;
   font-size: 18px;
   color: #fff;
-  background-color: #e6005a;
+  background-color: #b39501;
   width: 120px;
   height: 30px;
   align-self: center;
