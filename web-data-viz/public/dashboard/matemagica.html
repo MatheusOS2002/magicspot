@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão</title>
+        <link rel="stylesheet" href="../css/dashboards.css">
+        <link rel="stylesheet" href="../css/estilo.css">
+</head>
+
+<body>
+
+    <div class="janela">
+
+        <div class="header-left dash-header">
+
+            <a class="header-logo" href="../dashboard/cards.html"><img class="header-logo"
+                    src="../css/images/logobg.png"></a>
+
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./cards.html">
+                    <h3>Home</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav">
+                    <h3>Matemagica</h3>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./dashboard.html">
+                    <h3>Dashboard</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./mural.html">
+                    <h3>Mural de Avisos</h3>
+                </a>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+
+        <div class="dash">
+            <h1><strong>Previsão da soma</strong></h1>
+            <h3>
+                Vou realizar uma previsão de acordo com a primeira parcela informada.
+                A partir da segunda parcela também acrescentarei números à soma com a mesma quantidade de algarismos informada.
+            </h3>
+            <div id="div_primeiraParcela">
+                Quantas parcelas utilizará na soma? <input type="number" id="input_qtdParcelas"><br>
+                Quantos algarismos terá as parcelas? <input type="number" id="input_qtdAlgarismos"><br>
+                Digite o valor da primeira parcela: <input type="number" id="input_primeiraParcela"><br>
+                <button onclick="preverResultado()">Prever resultado</button>
+            </div>
+            <div id="div_parcelasRestantes" style="display: none">
+                Adicione as parcelas restantes: <input type="number" id="input_parcelasRestantes"><br>
+                <button onclick="adicionarParcela()">Adicionar parcela</button><br>
+                <button onclick="mostrarResultado()">Ver resultado</button>
+                <div id="div_resultado"></div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    const listaParcelas = []
+    function preverResultado() {
+        const qtdMaxParcelas = Number(input_qtdParcelas.value)
+        const qtdAlgarismos = Number(input_qtdAlgarismos.value)
+        const primeiraParcela = input_primeiraParcela.value
+        const qtdAlgarismosParcela = primeiraParcela.length
+        const subtraendo = qtdMaxParcelas - 1
+        const comecaComZero = primeiraParcela.startsWith(0)
+        
+        if (qtdAlgarismosParcela != qtdAlgarismos) {
+            alert("O número de algarismos da parcela informado está incorreto ou a parcela tem o número incorreto de algarismos")
+        } else if(primeiraParcela <= qtdMaxParcelas) {
+            alert("O número deve ser maior que a quantidade de parcelas")
+        } else if(comecaComZero) {
+            alert("A parcela formada deve começar com um número maior que zero")
+        } else {
+            listaParcelas.push(primeiraParcela)
+
+            div_primeiraParcela.style.display = "none"
+            div_parcelasRestantes.style.display = "block"
+            div_parcelasRestantes.innerHTML += `<br>O resultado da soma será ${subtraendo}${primeiraParcela - subtraendo}`
+        }
+    }
+
+    function adicionarParcela() {
+        const qtdAlgarismos = Number(input_qtdAlgarismos.value)
+        const parcela = input_parcelasRestantes.value
+        const comecaComZero = parcela.startsWith(0)
+        const qtdMaxParcelas = Number(input_qtdParcelas.value)
+        const qtdAlgarismosParcela = parcela.length
+        let qtdParcelasRegistradas = listaParcelas.length
+        
+        
+        if (qtdAlgarismosParcela != qtdAlgarismos) {
+            alert("O número de algarismos da parcela informado está incorreto ou a parcela tem o número incorreto de algarismos")
+        } else if(parcela <= qtdMaxParcelas) {
+            alert("O número deve ser maior que a quantidade de parcelas")
+        } else if(comecaComZero) {
+            alert("A parcela formada deve começar com um número maior que zero")
+        } else if (qtdMaxParcelas == qtdParcelasRegistradas) {
+            alert(`Você já registrou todas as parcelas, por favor recarregue a página e refaça a mágica`)
+        } else {
+            listaParcelas.push(parcela)
+            primeiraParcela = Number(listaParcelas[0])
+            div_resultado.innerHTML = `<br>`
+
+            
+            qtdParcelasRegistradas = listaParcelas.length
+            let numeroChave = ""
+            let meuNumero = 0
+            let resultadoAnterior = 0
+            let resultadoFinal = primeiraParcela
+            
+            for(let posicao = 1; posicao < qtdParcelasRegistradas; posicao += 1) {
+                let parcelaAtual = listaParcelas[posicao]
+                let qtdAlgarismos = parcelaAtual.length
+                let parcelaNumero = Number(parcelaAtual)
+                
+                for(let algarismos = 1; algarismos <= qtdAlgarismos; algarismos += 1) {
+                    numeroChave += "9"
+                }
+                
+                numeroChave = Number(numeroChave)
+                
+                meuNumero = numeroChave - parcelaNumero
+
+                resultadoAnterior = resultadoFinal
+                resultadoFinal += parcelaNumero + meuNumero
+                numeroChave = ""
+                div_resultado.innerHTML += `${resultadoAnterior} + ${parcelaAtual} + Meu número: ${meuNumero} = ${resultadoFinal} <br>`
+            }
+        }
+    }
+</script>
