@@ -1,3 +1,4 @@
+-- DROP DATABASE magicspot;
 CREATE DATABASE magicspot;
 USE magicspot;
 
@@ -19,7 +20,6 @@ fkUsuario INT,
 qtdNumero INT,
 qtdAlgarismo INT,
 resultado INT,
-dtTentativa DATETIME,
 CONSTRAINT pkTentativaEscolha PRIMARY KEY (idTentativa, fkUsuario),
 CONSTRAINT fkTentativaUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
@@ -29,8 +29,11 @@ idEscolha INT,
 fkTentativa INT,
 fkUsuario INT,
 fkNumero INT,
+dtTentativa DATETIME,
 CONSTRAINT pkEscolha PRIMARY KEY (idEscolha, fkTentativa, fkUsuario, fkNumero),
 CONSTRAINT fkTentativaEscolha FOREIGN KEY (fkTentativa) REFERENCES tentativa(idTentativa),
 CONSTRAINT fkUsuarioEscolha FOREIGN KEY (fkUsuario) REFERENCES tentativa(fkUsuario),
 CONSTRAINT fkNumeroEscolha FOREIGN KEY (fkNumero) REFERENCES numero(idNumero)
 );
+
+SELECT * FROM usuario;
