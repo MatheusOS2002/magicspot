@@ -1,4 +1,4 @@
--- DROP DATABASE magicspot;
+DROP DATABASE magicspot;
 CREATE DATABASE magicspot;
 USE magicspot;
 
@@ -35,5 +35,9 @@ CONSTRAINT fkTentativaEscolha FOREIGN KEY (fkTentativa) REFERENCES tentativa(idT
 CONSTRAINT fkUsuarioEscolha FOREIGN KEY (fkUsuario) REFERENCES tentativa(fkUsuario),
 CONSTRAINT fkNumeroEscolha FOREIGN KEY (fkNumero) REFERENCES numero(idNumero)
 );
+
+INSERT INTO usuario (nome, email, senha) VALUES
+	('Matheus', 'matheus@gmail.com', '123');
+
 
 SELECT * FROM usuario;
