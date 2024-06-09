@@ -9,20 +9,28 @@
     <title>MagicSpot | Página Inicial</title>
 
 
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
+
+    <!-- <link rel="stylesheet" href="./../css/dashboards.css">
+    <link rel="stylesheet" href="./../css/estilo.css" /> -->
 
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
+    <script src="../js/show_hide.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../css/estilo2.css">
 </head>
 
 <body onload="validarSessao()">
 
-    <div class="janela">
+    <!-- <div class="janela">
 
         <div class="header-left dash-header">
 
@@ -64,6 +72,47 @@
         <div class="dash">
         </div>
 
+    </div> -->
+    <div class="page">
+        <header id="div_header" class="header">
+            <div class="box header-content-left">
+                <span class="material-symbols-outlined arrow-up" onclick="hideHeader()">
+                    keyboard_arrow_up
+                </span>
+            </div>
+            <div class="box header-content-right">
+                <div class="box left-logo">
+                    <h2 class="button-selected">
+                        Home
+                    </h2>
+                    <a href="./dashboard.html">
+                        <h2 class="button">
+                            Dashboard
+                        </h2>
+                    </a>
+                </div>
+                <img class="logo" src="../css/images/logobg.png">
+                <div class="box right-logo">
+                    <a href="./matemagica.html">
+                        <h2 class="button">
+                            Matemágica
+                        </h2>
+                    </a>
+                    <a href="./mural.html">
+                        <h2 class="button">
+                            Mural
+                        </h2>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div id="div_content" class="content">
+            <div>
+                <span id="span_arrow_down" class="material-symbols-outlined arrow-down" onclick="showHeader()">
+                    keyboard_arrow_down
+                </span>
+            </div>
+        </div>
     </div>
 
 </body>
