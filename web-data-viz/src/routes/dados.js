@@ -7,4 +7,8 @@ router.get("/diario/:idUsuario", function (req, res) {
     dadosController.buscarUltimosDados(req, res);
 });
 
+router.post("/inserir/:idUsuario", function (req, res) {
+    dadosController.inserirDados(req, res);
+})
+
 module.exports = router;

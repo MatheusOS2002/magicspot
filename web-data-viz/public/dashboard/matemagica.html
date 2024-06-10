@@ -119,7 +119,7 @@
                 </div>
             </div>
         </header>
-        <div id="div_content" class="content">
+        <div id="div_content" class="box content">
             <div>
                 <div id="span_arrow_down" class="material-symbols-outlined arrow-down" onclick="showHeader()">
                     keyboard_arrow_down
@@ -127,7 +127,7 @@
             </div>
             <div class="box card">
                 <h1><strong>Previsão da soma</strong></h1>
-                <div class="title">
+                <div class="box title">
                     <h3>
                         Vou realizar uma previsão de acordo com a primeira parcela informada.
                         A partir da segunda parcela também acrescentarei números à soma com a mesma quantidade de
@@ -135,17 +135,18 @@
                         informada.
                     </h3>
                 </div>
-                <div id="div_primeiraParcela" class="">
-                    Quantas parcelas utilizará na soma? <input type="number" id="input_qtdParcelas"><br>
-                    Quantos algarismos terá as parcelas? <input type="number" id="input_qtdAlgarismos"><br>
-                    Digite o valor da primeira parcela: <input type="number" id="input_primeiraParcela"><br>
-                    <button onclick="preverResultado()">Prever resultado</button>
+                <div id="div_previsao" class="box previsao" style="display: none"></div>
+                <div id="div_primeiraParcela" class="box formulario">
+                    <p>Quantas parcelas utilizará na soma?</p> <input type="number" id="input_qtdParcelas">
+                    <p>Quantos algarismos terá as parcelas?</p> <input type="number" id="input_qtdAlgarismos">
+                    <p>Digite o valor da primeira parcela:</p> <input type="number" id="input_primeiraParcela">
+                    <button class="botao" onclick="preverResultado()">Prever resultado</button>
                 </div>
-                <div id="div_parcelasRestantes" style="display: none">
-                    Adicione as parcelas restantes: <input type="number" id="input_parcelasRestantes"><br>
-                    <button onclick="adicionarParcela()">Adicionar parcela</button>
-                    <button onclick="mostrarResultado()">Ver resultado</button>
-                    <div id="div_resultado"></div>
+                <div id="div_parcelasRestantes" class="box formulario" style="display: none">
+                    <h3 id="div_qtdParcelasRestantes"></h3>
+                    <input type="number" id="input_parcelasRestantes">
+                    <button class="botao" onclick="adicionarParcela()">Adicionar parcela</button>
+                    <div id="div_resultado" style="display: none"></div>
                 </div>
             </div>
         </div>
@@ -165,7 +166,9 @@
         const subtraendo = qtdMaxParcelas - 1
         const comecaComZero = primeiraParcela.startsWith(0)
 
-        if (qtdAlgarismosParcela != qtdAlgarismos) {
+        if (qtdAlgarismos < 3) {
+            alert("Para dificultar, coloque ao menos 3 algarismos")
+        } else if (qtdAlgarismosParcela != qtdAlgarismos) {
             alert("O número de algarismos da parcela informado está incorreto ou a parcela tem o número incorreto de algarismos")
         } else if (primeiraParcela <= qtdMaxParcelas) {
             alert("O número deve ser maior que a quantidade de parcelas")
@@ -175,8 +178,10 @@
             listaParcelas.push(primeiraParcela)
 
             div_primeiraParcela.style.display = "none"
-            div_parcelasRestantes.style.display = "block"
-            div_parcelasRestantes.innerHTML += `<br>O resultado da soma será ${subtraendo}${primeiraParcela - subtraendo}`
+            div_parcelasRestantes.style.display = "flex"
+            div_previsao.style.display = "flex"
+            div_previsao.innerHTML += `<h1>O resultado da soma será ${subtraendo}${primeiraParcela - subtraendo}!</h1>`
+            div_qtdParcelasRestantes.innerHTML = `Adicione as parcelas restantes: ${qtdMaxParcelas - listaParcelas.length}`
         }
     }
 
@@ -200,7 +205,9 @@
         } else {
             listaParcelas.push(parcela)
             primeiraParcela = Number(listaParcelas[0])
-            div_resultado.innerHTML = `<br>`
+
+            div_resultado.style.display = `flex`
+            div_resultado.innerHTML = ""
 
 
             qtdParcelasRegistradas = listaParcelas.length
@@ -226,7 +233,51 @@
                 resultadoFinal += parcelaNumero + meuNumero
                 numeroChave = ""
                 div_resultado.innerHTML += `${resultadoAnterior} + ${parcelaAtual} + Meu número: ${meuNumero} = ${resultadoFinal} <br>`
+
             }
+            
+            div_qtdParcelasRestantes.innerHTML = `Adicione as parcelas restantes: ${qtdMaxParcelas - listaParcelas.length}`
+            // if (qtdParcelasRegistradas == qtdMaxParcelas) {
+            //     div_resultado.innerHTML += `<br> <h2>Resultado final da soma: ${resultadoFinal}</h2>`
+            // }
         }
+    }
+
+    function inserirDados() {
+
+        idUsuario = sessionStorage.ID_USUARIO;
+
+        for (let posicao = 0; posicao < listaParcelas.length; posicao ++) {
+            let parcela = listaParcelas[posicao]
+            
+            let parcelas = {
+                valor: parcela
+            }
+
+            fetch(`/dados/inserir/${idUsuario}`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(parcelas)
+            }).then(function (resposta) {
+    
+                console.log("resposta: ", resposta);
+    
+                if (resposta.ok) {
+                    window.location = "/dashboard/matemagica.html";
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+            parcelas.numeros = parcela
+        }
+
     }
 </script>

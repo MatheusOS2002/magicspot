@@ -24,7 +24,7 @@
 }
 
 .header {
-    height: 10%;
+    height: 80px;
     width: 100%;
     background-color: #2D5731;
 }
@@ -86,11 +86,58 @@
 
 .content {
     height: 90%;
+    justify-content: center;
 }
 
 /* Matemágica */
 
-.card {
+.card, .title{
+    background-color: #2D5731;
+    color: #FFF;
+    width: 600px;
     flex-direction: column;
+    border-radius: 10px;
+}
+
+.card {
+    height: 450px;
+    text-align: center;
+    padding: 10px;
+}
+
+.card input {
+    border: 2px solid #32cd9f;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.botao {
+    cursor: pointer;
+    font-family: "Barlow", sans-serif;
+    border: 0;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #fff;
+    background-color: #b39501;
+    width: 140px;
+    height: 50px;
+    align-self: center;
+    margin-top: 25px;
+}
+
+.title {
+    margin: 20px 0 20px 0;
+}
+
+.formulario {
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 280px;
+}
+
+.previsao {
     margin-bottom: 20px;
 }
