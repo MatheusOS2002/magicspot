@@ -4,6 +4,7 @@
     overflow: hidden;
 }
 
+/* Home e Header */
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -17,14 +18,12 @@
     width: 100vw;
 }
 
-.box {
+.box, .header{
     display: flex;
     align-items: center;
 }
 
 .header {
-    display: flex;
-    align-items: center;
     height: 10%;
     width: 100%;
     background-color: #2D5731;
@@ -44,17 +43,20 @@
     height: 100%;
     width: 5%;
 }
-    
+
+.arrow-up, .arrow-down {
+    width: 50px;
+    font-size: 50px;
+    cursor: pointer;
+}    
     
 .arrow-up {
     color: white;
-    font-size: 50px;
 }
 
 .arrow-down {
     display: none;
     color: #2D5731;
-    font-size: 50px;
 }
 
 .header-content-right {
@@ -84,4 +86,11 @@
 
 .content {
     height: 90%;
+}
+
+/* Matemágica */
+
+.card {
+    flex-direction: column;
+    margin-bottom: 20px;
 }

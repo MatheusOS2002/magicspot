@@ -4,14 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previsão</title>
-        <link rel="stylesheet" href="../css/dashboards.css">
-        <link rel="stylesheet" href="../css/estilo.css">
+    <title>MagicSpot | Previsão</title>
+
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+    <script src="../js/show_hide.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../css/estilo2.css">
 </head>
 
 <body>
 
-    <div class="janela">
+    <!-- <div class="janela">
 
         <div class="header-left dash-header">
 
@@ -29,7 +42,7 @@
             </div>
 
             <div class="btn-nav">
-                    <h3>Matemagica</h3>
+                <h3>Matemagica</h3>
             </div>
 
             <div class="btn-nav-white">
@@ -54,7 +67,8 @@
             <h1><strong>Previsão da soma</strong></h1>
             <h3>
                 Vou realizar uma previsão de acordo com a primeira parcela informada.
-                A partir da segunda parcela também acrescentarei números à soma com a mesma quantidade de algarismos informada.
+                A partir da segunda parcela também acrescentarei números à soma com a mesma quantidade de algarismos
+                informada.
             </h3>
             <div id="div_primeiraParcela">
                 Quantas parcelas utilizará na soma? <input type="number" id="input_qtdParcelas"><br>
@@ -70,6 +84,71 @@
             </div>
         </div>
 
+    </div> -->
+
+    <div class="page">
+        <header id="div_header" class="header">
+            <div class="box header-content-left">
+                <span class="material-symbols-outlined arrow-up" onclick="hideHeader()">
+                    keyboard_arrow_up
+                </span>
+            </div>
+            <div class="box header-content-right">
+                <div class="box left-logo">
+                    <a href="./cards.html">
+                        <h2 class="button">
+                            Home
+                        </h2>
+                    </a>
+                    <a href="./dashboard.html">
+                        <h2 class="button">
+                            Dashboard
+                        </h2>
+                    </a>
+                </div>
+                <a href="./cards.html"><img class="logo" src="../css/images/logobg.png"></a>
+                <div class="box right-logo">
+                    <h2 class="button-selected">
+                        Matemágica
+                    </h2>
+                    <a href="./mural.html">
+                        <h2 class="button">
+                            Fórum
+                        </h2>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div id="div_content" class="content">
+            <div>
+                <div id="span_arrow_down" class="material-symbols-outlined arrow-down" onclick="showHeader()">
+                    keyboard_arrow_down
+                </div>
+            </div>
+            <div class="box card">
+                <h1><strong>Previsão da soma</strong></h1>
+                <div class="title">
+                    <h3>
+                        Vou realizar uma previsão de acordo com a primeira parcela informada.
+                        A partir da segunda parcela também acrescentarei números à soma com a mesma quantidade de
+                        algarismos
+                        informada.
+                    </h3>
+                </div>
+                <div id="div_primeiraParcela" class="">
+                    Quantas parcelas utilizará na soma? <input type="number" id="input_qtdParcelas"><br>
+                    Quantos algarismos terá as parcelas? <input type="number" id="input_qtdAlgarismos"><br>
+                    Digite o valor da primeira parcela: <input type="number" id="input_primeiraParcela"><br>
+                    <button onclick="preverResultado()">Prever resultado</button>
+                </div>
+                <div id="div_parcelasRestantes" style="display: none">
+                    Adicione as parcelas restantes: <input type="number" id="input_parcelasRestantes"><br>
+                    <button onclick="adicionarParcela()">Adicionar parcela</button>
+                    <button onclick="mostrarResultado()">Ver resultado</button>
+                    <div id="div_resultado"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
@@ -85,12 +164,12 @@
         const qtdAlgarismosParcela = primeiraParcela.length
         const subtraendo = qtdMaxParcelas - 1
         const comecaComZero = primeiraParcela.startsWith(0)
-        
+
         if (qtdAlgarismosParcela != qtdAlgarismos) {
             alert("O número de algarismos da parcela informado está incorreto ou a parcela tem o número incorreto de algarismos")
-        } else if(primeiraParcela <= qtdMaxParcelas) {
+        } else if (primeiraParcela <= qtdMaxParcelas) {
             alert("O número deve ser maior que a quantidade de parcelas")
-        } else if(comecaComZero) {
+        } else if (comecaComZero) {
             alert("A parcela formada deve começar com um número maior que zero")
         } else {
             listaParcelas.push(primeiraParcela)
@@ -108,13 +187,13 @@
         const qtdMaxParcelas = Number(input_qtdParcelas.value)
         const qtdAlgarismosParcela = parcela.length
         let qtdParcelasRegistradas = listaParcelas.length
-        
-        
+
+
         if (qtdAlgarismosParcela != qtdAlgarismos) {
             alert("O número de algarismos da parcela informado está incorreto ou a parcela tem o número incorreto de algarismos")
-        } else if(parcela <= qtdMaxParcelas) {
+        } else if (parcela <= qtdMaxParcelas) {
             alert("O número deve ser maior que a quantidade de parcelas")
-        } else if(comecaComZero) {
+        } else if (comecaComZero) {
             alert("A parcela formada deve começar com um número maior que zero")
         } else if (qtdMaxParcelas == qtdParcelasRegistradas) {
             alert(`Você já registrou todas as parcelas, por favor recarregue a página e refaça a mágica`)
@@ -123,24 +202,24 @@
             primeiraParcela = Number(listaParcelas[0])
             div_resultado.innerHTML = `<br>`
 
-            
+
             qtdParcelasRegistradas = listaParcelas.length
             let numeroChave = ""
             let meuNumero = 0
             let resultadoAnterior = 0
             let resultadoFinal = primeiraParcela
-            
-            for(let posicao = 1; posicao < qtdParcelasRegistradas; posicao += 1) {
+
+            for (let posicao = 1; posicao < qtdParcelasRegistradas; posicao += 1) {
                 let parcelaAtual = listaParcelas[posicao]
                 let qtdAlgarismos = parcelaAtual.length
                 let parcelaNumero = Number(parcelaAtual)
-                
-                for(let algarismos = 1; algarismos <= qtdAlgarismos; algarismos += 1) {
+
+                for (let algarismos = 1; algarismos <= qtdAlgarismos; algarismos += 1) {
                     numeroChave += "9"
                 }
-                
+
                 numeroChave = Number(numeroChave)
-                
+
                 meuNumero = numeroChave - parcelaNumero
 
                 resultadoAnterior = resultadoFinal

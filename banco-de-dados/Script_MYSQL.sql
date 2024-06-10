@@ -29,7 +29,7 @@ idEscolha INT,
 fkTentativa INT,
 fkUsuario INT,
 fkNumero INT,
-dtTentativa DATETIME,
+dtTentativa DATE,
 CONSTRAINT pkEscolha PRIMARY KEY (idEscolha, fkTentativa, fkUsuario, fkNumero),
 CONSTRAINT fkTentativaEscolha FOREIGN KEY (fkTentativa) REFERENCES tentativa(idTentativa),
 CONSTRAINT fkUsuarioEscolha FOREIGN KEY (fkUsuario) REFERENCES tentativa(fkUsuario),
@@ -41,3 +41,5 @@ INSERT INTO usuario (nome, email, senha) VALUES
 
 
 SELECT * FROM usuario;
+
+SELECT count(fkTentativa) AS qtdTentativas, dtTentativa FROM escolha WHERE fkUsuario = 1 GROUP BY dtTentativa ORDER BY dtTentativa DESC LIMIT 7;
