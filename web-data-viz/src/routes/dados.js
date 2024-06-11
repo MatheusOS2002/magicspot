@@ -11,4 +11,12 @@ router.post("/inserir/:idUsuario", function (req, res) {
     dadosController.inserirDados(req, res);
 })
 
+router.post("/inserir/numero/parcelas/", function (req, res) {
+    dadosController.inserirParcelas(req, res);
+})
+
+router.post("/inserir/escolha/:idUsuario", function (req, res) {
+    dadosController.inserirEscolha(req, res);
+})
+
 module.exports = router;

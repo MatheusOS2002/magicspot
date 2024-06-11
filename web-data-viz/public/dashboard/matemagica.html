@@ -235,49 +235,88 @@
                 div_resultado.innerHTML += `${resultadoAnterior} + ${parcelaAtual} + Meu número: ${meuNumero} = ${resultadoFinal} <br>`
 
             }
-            
+
             div_qtdParcelasRestantes.innerHTML = `Adicione as parcelas restantes: ${qtdMaxParcelas - listaParcelas.length}`
-            // if (qtdParcelasRegistradas == qtdMaxParcelas) {
-            //     div_resultado.innerHTML += `<br> <h2>Resultado final da soma: ${resultadoFinal}</h2>`
-            // }
+            if (qtdParcelasRegistradas == qtdMaxParcelas) {
+                inserirDados(qtdMaxParcelas, qtdAlgarismos, resultadoFinal)
+                div_resultado.innerHTML += `<br> <h2>Resultado final da soma: ${resultadoFinal}</h2>`
+            }
         }
     }
 
-    function inserirDados() {
+    function inserirDados(qtdNumeros, qtdAlgarismos, resultadoFinal) {
 
-        idUsuario = sessionStorage.ID_USUARIO;
+        let idUsuario = sessionStorage.ID_USUARIO;
 
-        for (let posicao = 0; posicao < listaParcelas.length; posicao ++) {
-            let parcela = listaParcelas[posicao]
-            
-            let parcelas = {
-                valor: parcela
+        fetch(`/dados/inserir/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                qtdNumeros: qtdNumeros,
+                qtdAlgarismos: qtdAlgarismos,
+                resultadoFinal: resultadoFinal
+            })
+        }).then(async function (resposta) {
+
+            for (let posicao = 0; posicao < listaParcelas.length; posicao++) {
+                let parcelaAtual = listaParcelas[posicao]
+
+                await fetch(`/dados/inserir/numero/parcelas/`, {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        parcela: parcelaAtual
+                    })
+                }).then(async function (resposta) {
+
+                    await fetch(`/dados/inserir/escolha/${idUsuario}`, {
+                        method: "post",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }).then(function (resposta) {
+
+                        // if (resposta.status == 404) {
+                        //     window.alert("Deu 404!");
+                        // } else {
+                        //     throw ("Houve um erro ao tentar registrar a escolha! Código da resposta: " + resposta.status);
+                        // }
+
+                    }).catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+                        finalizarAguardar();
+                    });
+
+                    // console.log("resposta: ", resposta);
+
+                    // if (resposta.status == 404) {
+                    //     window.alert("Deu 404!");
+                    // } else {
+                    //     throw ("Houve um erro ao tentar registrar as parcelas! Código da resposta: " + resposta.status);
+                    // }
+
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                    finalizarAguardar();
+                });
             }
 
-            fetch(`/dados/inserir/${idUsuario}`, {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(parcelas)
-            }).then(function (resposta) {
-    
-                console.log("resposta: ", resposta);
-    
-                if (resposta.ok) {
-                    window.location = "/dashboard/matemagica.html";
-                } else if (resposta.status == 404) {
-                    window.alert("Deu 404!");
-                } else {
-                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-                }
-            }).catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-                finalizarAguardar();
-            });
+            // console.log("resposta: ", resposta);
 
-            parcelas.numeros = parcela
-        }
-
+            // if (resposta.ok) {
+            //     window.location = "/dashboard/matemagica.html";
+            // } else if (resposta.status == 404) {
+            //     window.alert("Deu 404!");
+            // } else {
+            //     throw ("Houve um erro ao tentar registrar a tentativa! Código da resposta: " + resposta.status);
+            // }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
     }
 </script>

@@ -130,7 +130,10 @@
             <div class="dash">
                 <div class="kpi">
                 </div>
-                <div class="box grafico">
+                <div id="div_grafico" class="box grafico">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                      </div>
                 </div>
             </div>
         </div>
@@ -214,7 +217,7 @@
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro.dtTentativas);
+            labels.push(registro.dtEscolha);
             dados.datasets[0].data.push(registro.qtdTentativas);
         }
 
@@ -234,7 +237,7 @@
 
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
-            document.getElementById(`grafico`),
+            document.getElementById(`myChart`),
             config
         );
 
