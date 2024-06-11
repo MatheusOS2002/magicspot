@@ -20,14 +20,16 @@ function verificarUltimaTentativa(idUsuario) {
 
     console.log(`\nidUsuario: ${idUsuario}\n`)
 
-    var instrucaoSql = `SELECT max(idTentativa) AS ultimaTentativa FROM tentativa WHERE fkUsuario = ${idUsuario};`;
+    var instrucaoSql = `SELECT max(idTentativa) AS ultimaTentativa FROM tentativa
+    WHERE fkUsuario = ${idUsuario};`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function inserirTentativa(idTentativa, idUsuario, qtdNumero, qtdAlgarismos, resultadoFinal) {
-    var instrucaoSql = `INSERT INTO tentativa (idTentativa, fkUsuario, qtdNumero, qtdAlgarismo, resultado) VALUES (${idTentativa}, ${idUsuario}, ${qtdNumero}, ${qtdAlgarismos}, ${resultadoFinal});`;
+    var instrucaoSql = `INSERT INTO tentativa (idTentativa, fkUsuario, qtdNumero, qtdAlgarismo, resultado)
+    VALUES (${idTentativa}, ${idUsuario}, ${qtdNumero}, ${qtdAlgarismos}, ${resultadoFinal});`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -48,7 +50,8 @@ function verificarNumeroInserido() {
 }
 
 function inserirEscolha(idEscolha, idUsuario, idTentativa, idNumero) {
-    var instrucaoSql = `INSERT INTO escolha (idEscolha, fkTentativa, fkUsuario, fkNumero, dtEscolha) VALUES (${idEscolha}, ${idTentativa}, ${idUsuario}, ${idNumero}, CURDATE());`;
+    var instrucaoSql = `INSERT INTO escolha (idEscolha, fkTentativa, fkUsuario, fkNumero, dtEscolha)
+    VALUES (${idEscolha}, ${idTentativa}, ${idUsuario}, ${idNumero}, CURDATE());`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
