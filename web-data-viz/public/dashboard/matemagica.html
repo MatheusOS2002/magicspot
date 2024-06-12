@@ -95,27 +95,20 @@
             </div>
             <div class="box header-content-right">
                 <div class="box left-logo">
-                    <a href="./cards.html">
-                        <h2 class="button">
-                            Home
-                        </h2>
-                    </a>
+                    <h2 class="button-selected">
+                        Matemágica
+                    </h2>
+                </div>
+                <a href="./cards.html"><img class="logo" src="../css/images/logobg.png"></a>
+                <div class="box right-logo">
                     <a href="./dashboard.html">
                         <h2 class="button">
                             Dashboard
                         </h2>
                     </a>
                 </div>
-                <a href="./cards.html"><img class="logo" src="../css/images/logobg.png"></a>
-                <div class="box right-logo">
-                    <h2 class="button-selected">
-                        Matemágica
-                    </h2>
-                    <a href="./mural.html">
-                        <h2 class="button">
-                            Fórum
-                        </h2>
-                    </a>
+                <div class="box btn-logout" onclick="limparSessao()">
+                    <h2>Sair</h2>
                 </div>
             </div>
         </header>
@@ -279,8 +272,6 @@
                             "Content-Type": "application/json"
                         }
                     }).then(function (resposta) {
-                        
-                        res.json(resposta)
 
                     }).catch(function (resposta) {
                         

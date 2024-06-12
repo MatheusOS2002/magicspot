@@ -45,6 +45,6 @@ SELECT * FROM tentativa;
 SELECT * FROM numero;
 SELECT * FROM escolha;
 
-SELECT count(fkTentativa) AS qtdTentativas, dtEscolha FROM escolha WHERE fkUsuario = 1 GROUP BY dtEscolha ORDER BY dtEscolha DESC LIMIT 7;
+SELECT count(fkTentativa) AS qtdTentativas, DATE_FORMAT(dtEscolha, '%d/%m/%Y') as dtEscolha FROM escolha WHERE fkUsuario = 1 GROUP BY dtEscolha ORDER BY dtEscolha DESC LIMIT 7;
 
 SELECT max(idTentativa) AS ultimaTentativa FROM tentativa WHERE fkUsuario = 1;

@@ -4,11 +4,11 @@
 
 .grafico {
     margin-top: 30px;
-    height: 350px;
+    height: 600px;
 }
 
 #myChart {
-    height: 300px;
+    height: 400px;
 }
 
 .kpi {
@@ -19,14 +19,17 @@
 }
 
 .card_kpi {
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
     width: 200px;
-    border-radius: 30px;
     text-align: center;
-}
-
-.card_kpi {
+    background-color: rgb(197, 47, 47);
+    color: #FAE57F;
     font-size: 20px;
+    border-width: 5px;
+    border-color: #2D5731;
+    border-radius: 10px;
 }
 
 .content, .grafico {

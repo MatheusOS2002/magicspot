@@ -65,6 +65,17 @@
     width: 95%;
 }
 
+.btn-logout {
+    width: 60px;
+    height: 60%;
+    border-radius: 180px;
+    cursor: pointer;
+    background-color: #c91010;
+    color: #FFF;
+    justify-content: center;
+    text-align: center;
+}
+
 .left-logo, .right-logo{
     justify-content: space-evenly;
     height: 100%;
