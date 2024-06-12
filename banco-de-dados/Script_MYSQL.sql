@@ -36,6 +36,7 @@ CONSTRAINT fkUsuarioEscolha FOREIGN KEY (fkUsuario) REFERENCES tentativa(fkUsuar
 CONSTRAINT fkNumeroEscolha FOREIGN KEY (fkNumero) REFERENCES numero(idNumero)
 );
 
+
 INSERT INTO usuario (nome, email, senha) VALUES
 	('Matheus', 'matheus@gmail.com', '123');
 
@@ -48,3 +49,9 @@ SELECT * FROM escolha;
 SELECT count(fkTentativa) AS qtdTentativas, DATE_FORMAT(dtEscolha, '%d/%m/%Y') as dtEscolha FROM escolha WHERE fkUsuario = 1 GROUP BY dtEscolha ORDER BY dtEscolha DESC LIMIT 7;
 
 SELECT max(idTentativa) AS ultimaTentativa FROM tentativa WHERE fkUsuario = 1;
+
+SELECT count(idEscolha) FROM escolha
+    WHERE dtEscolha = CURDATE() AND fkUsuario = 1;
+
+SELECT count(idEscolha) FROM escolha
+    WHERE fkUsuario = 1 AND DATEDIFF(CURRENT_DATE, dtEscolha) <= 7;
